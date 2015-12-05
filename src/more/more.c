@@ -57,8 +57,12 @@ int see_more()
     int c;
     // This tip will split your content. I have not got a solution.
     printf("\033[7m more?\033[m");
+    FILE *fp_tty = fopen("/dev/tty", "r");
+    if (fp_tty == NULL) {
+        exit(1);
+    }
 
-    while ( (c = getchar()) != EOF) {
+    while ( (c = getc(fp_tty)) != EOF) {
         if (c == 'q') {
             return 0;
         }
